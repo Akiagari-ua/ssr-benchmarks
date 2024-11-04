@@ -5,7 +5,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "next-dev:v14": "yarn --cwd ./next-v14 dev"
+    "next-dev:v14": "yarn --cwd ./next-v14 dev",
+    "remix-dev:v2": " yarn --cwd ./remix-v2 dev --port 3001"
   },
   "dependencies": {
     "create-next-app": "14",
