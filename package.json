@@ -1,8 +1,12 @@
 {
   "name": "ssr-benchmarks",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "next-dev:v14": "yarn --cwd ./next-v14 dev"
+  },
   "dependencies": {
     "create-next-app": "14",
     "create-remix": "^2.13.1",
@@ -11,5 +15,8 @@
   },
   "devDependencies": {
     "@types/react": "^18.3.12"
-  }
+  },
+  "workspaces": [
+    "*"
+  ]
 }

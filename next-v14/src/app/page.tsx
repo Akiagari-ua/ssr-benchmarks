@@ -1,5 +1,4 @@
-import Image from "next/image";
-import PageWithText from '../../../src/pages/PageWithText'
+import PageWithText from '@pages/PageWithText'
 
 export default function Home() {
   return (
