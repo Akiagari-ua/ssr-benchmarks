@@ -1,0 +1,16 @@
+{
+  "url": "http://localhost:3000/list",
+  "requests": 3997,
+  "duration": 0.06007,
+  "bytes": 152265715,
+  "errors": 0,
+  "latency": {
+    "min": 402,
+    "max": 3032,
+    "mean": 1460.96,
+    "p50": 1456,
+    "p90": 1737,
+    "p99": 1925
+  },
+  "requests_per_second": 66.62
+}

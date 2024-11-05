@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:3000"  # Целевой URL вашего приложения
+  phases:
+    - duration: 30       # Длительность теста в секундах
+      arrivalRate: 1000    # Количество новых виртуальных пользователей в секунду
+  defaults:
+    headers:
+      accept: "application/json"   # Установка заголовка по умолчанию
+scenarios:
+  - flow:
+      - get:
+          url: "/list"         # Endpoint для тестирования

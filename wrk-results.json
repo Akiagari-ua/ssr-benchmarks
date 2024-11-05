@@ -1,0 +1,24 @@
+      {
+        "requests": 4968,
+        "duration_in_seconds": 30.10,
+        "bytes": 38387247,
+        "errors": {
+          "connect": 0,
+          "read": 0,
+          "write": 0,
+          "timeout": 2464
+        },
+        "latency": {
+          "min": 1131.56,
+          "max": 1999.68,
+          "mean": 1664.51,
+          "stdev": 278.57,
+          "percentiles": {
+            "50": 1691.53,
+            "90": 1976.49,
+            "99": 1998.67
+          }
+        },
+        "requests_per_second": 165.05
+      }
+    

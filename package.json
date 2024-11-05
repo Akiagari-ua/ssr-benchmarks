@@ -6,16 +6,35 @@
   "license": "MIT",
   "scripts": {
     "next-dev:v14": "yarn --cwd ./next-v14 dev",
-    "remix-dev:v2": " yarn --cwd ./remix-v2 dev --port 3001"
+    "next-build:v14": "yarn --cwd ./next-v14 build",
+    "next-start:v14": "yarn --cwd ./next-v14 start",
+    "remix-dev:v2": " yarn --cwd ./remix-v2 dev --port 3001",
+    "build": "webpack --config webpack.config.js",
+    "start": "yarn build && node ./dist/benchmark.js"
   },
   "dependencies": {
-    "create-next-app": "14",
-    "create-remix": "^2.13.1",
-    "react": "^18.3.1",
-    "typescript": "^5.6.3"
+    "artillery": "^2.0.21",
+    "autocannon": "^8.0.0",
+    "chart.js": "^4.4.6",
+    "chartist": "^1.3.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "dotenv": "^16.4.5",
+    "html-loader": "^5.1.0",
+    "react": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.3.12"
+    "@types/autocannon": "^7.12.5",
+    "@types/react": "^18.3.12",
+    "create-next-app": "14",
+    "create-remix": "^2.13.1",
+    "css-loader": "^7.1.2",
+    "mini-css-extract-plugin": "^2.9.2",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-node-externals": "^3.0.0"
   },
   "workspaces": [
     "*"
