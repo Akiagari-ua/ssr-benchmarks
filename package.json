@@ -5,13 +5,11 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "next-dev:v14": "yarn --cwd ./next-v14 dev",
-    "next-build:v14": "yarn --cwd ./next-v14 build",
-    "next-start:v14": "yarn --cwd ./next-v14 start",
-    "remix-dev:v2": " yarn --cwd ./remix-v2 dev --port 3001",
-    "build": "webpack --config webpack.config.js",
-    "run:server": "node ./dist/benchmark.js",
-    "start": "yarn build && yarn run:server"
+    "next-build:v14": "docker compose build --no-cache next-v14",
+    "remix-build:v2": "docker compose build --no-cache remix-v2",
+    "benchmark-build": "docker compose build --no-cache benchmark",
+    "build:all": "docker compose build --no-cache",
+    "benchmark:start": "docker compose up"
   },
   "dependencies": {
     "next": "14.2.16",

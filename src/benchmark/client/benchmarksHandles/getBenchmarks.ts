@@ -10,7 +10,7 @@ interface Output {
 
 async function getBenchmarks(): Promise<Output> {
   const benchmarks = await fetch("/api/run").then(r => r.json());
-  console.log(benchmarks)
+
   //@ts-ignore
   const latency = handleLatency(benchmarks);
   //@ts-ignore

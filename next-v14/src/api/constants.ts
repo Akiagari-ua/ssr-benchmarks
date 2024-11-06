@@ -1,0 +1,1 @@
+export const API_ENDPOINT = 'https://hitnspin.stage-cms.ginsp.net/graphql'
