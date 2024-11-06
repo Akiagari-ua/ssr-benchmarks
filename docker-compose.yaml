@@ -1,0 +1,32 @@
+version: '3.8'
+
+x-env: &common-env
+  NEXT_V14_PORT: 4000
+  REMIX_V2_PORT: 4040
+  BENCHMARK_SERVER_PORT: 3000
+  NEXT_V14_HOSTNAME: "next-v14" 
+  REMIX_V2_HOSTNAME: "remix-v2" 
+
+services:
+  next-v14:
+    build: ./next-v14
+    image: next-v14
+    ports:
+      - "${NEXT_V14_PORT}:${NEXT_V14_PORT}"
+    environment:
+      <<: *common-env
+  remix-v2:
+    build: ./remix-v2
+    image: remix-v2
+    ports:
+      - "${REMIX_V2_PORT}:${REMIX_V2_PORT}"
+    environment:
+      <<: *common-env
+  benchmark:
+    build: ./
+    image: benchmark
+    ports:
+      - "${BENCHMARK_SERVER_PORT}:${BENCHMARK_SERVER_PORT}"
+    environment:
+      <<: *common-env
+

@@ -1,9 +1,9 @@
-import autocannon, { Instance, Result } from 'autocannon';
+import autocannon from 'autocannon';
 
 export interface BenchmarkResult {
-  url: string;
+  name: string;
   requests: number;
-  duration: number; // в секундах
+  duration: number;
   bytes: number;
   errors: number;
   latency: {
@@ -18,16 +18,22 @@ export interface BenchmarkResult {
   requests_per_second: number;
 }
 
-function runBenchmark(url: string): Promise<BenchmarkResult> {
-  return new Promise(async (resolve, reject) => {
+const CONNECTIONS_COUNT = Number(process.env.CONNECTIONS_COUNT)
+const TEST_DURATION = Number(process.env.TEST_DURATION)
+
+const connections = isNaN(CONNECTIONS_COUNT) ? 100 : CONNECTIONS_COUNT
+const duration = isNaN(TEST_DURATION) ? 30 : TEST_DURATION
+
+function runBenchmark(url: string, name: string): Promise<BenchmarkResult> {
+  return new Promise(async (resolve) => {
     const result = await autocannon({
       url,
-      connections: 100, 
-      duration: 10,      
+      connections, 
+      duration,      
     });
 
       const output: BenchmarkResult = {
-        url,
+        name,
         requests: result.requests.total,
         duration: result.duration / 1000,
         bytes: result.throughput.total,

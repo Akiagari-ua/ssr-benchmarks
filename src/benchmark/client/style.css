@@ -15,3 +15,11 @@ h1 {
 canvas {
   max-width: 600px;
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.canvas-wrapper {
+  display: flex;
+}

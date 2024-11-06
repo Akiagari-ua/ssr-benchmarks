@@ -4,13 +4,22 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
 
+// Сборка серверных файлов
 const serverEntries = glob.sync('./src/benchmark/**/*.ts').reduce((acc, file) => {
   const entryName = path.relative('./src/benchmark', file).replace(/\.ts$/, '');
   acc[entryName] = file;
   return acc;
 }, {});
 
+// Сборка клиентских файлов
+const clientEntries = glob.sync('./src/benchmark/client/**/*.ts').reduce((acc, file) => {
+  const entryName = path.relative('./src/benchmark/client', file).replace(/\.ts$/, '');
+  acc[entryName] = file;
+  return acc;
+}, {});
+
 module.exports = [
+  // Конфигурация для серверных файлов
   {
     mode: process.env.NODE_ENV || 'production',
     entry: serverEntries,
@@ -52,14 +61,15 @@ module.exports = [
     },
     devtool: 'source-map',
   },
+
+  // Конфигурация для клиентских файлов
   {
     mode: process.env.NODE_ENV || 'production',
-    entry: {
-      chart: './src/benchmark/client/chart.ts',
-    },
+    entry: clientEntries,
     output: {
       path: path.resolve(__dirname, 'dist/client'),
       filename: '[name].js',
+      chunkFilename: '[name].js',
     },
     target: 'web',
     module: {
@@ -82,6 +92,10 @@ module.exports = [
     ],
     resolve: {
       extensions: ['.ts', '.js'],
+      alias: {
+        src: path.resolve(__dirname, 'src'),
+      },
+      preferRelative: true, 
     },
     devtool: 'source-map',
   },

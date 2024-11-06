@@ -1,25 +1,18 @@
 import * as http from "http";
 import * as path from "path";
-import { ChildProcess } from "child_process";
-import { handleCss, handleHtml, handleJs, stopChildProcesses } from "./utils";
+
+import { handleCss, handleHtml, handleJs } from "./utils";
 import nextV14 from "./benchmarks/nextV14";
-import { ChildProccesCache } from "./types";
+import remixV2 from "./benchmarks/remixV2";
+
 require("dotenv").config();
 
 const PORT = process.env.BENCHMARK_SERVER_PORT || 3000;
-const childProcesses: ChildProccesCache = {};
-
-function handleSigint(childProcesses: ChildProccesCache) {
-  console.log("Received SIGINT. Stopping server and all child processes...", childProcesses );
-  stopChildProcesses(childProcesses);
-}
 
 const requestHandler = async (
   req: http.IncomingMessage,
   res: http.ServerResponse
 ) => {
-  process.once("SIGINT", handleSigint);
-
   if (req.url === "/") {
     const fullPath = path.join(__dirname, "./client/index.html");
     handleHtml(res, fullPath);
@@ -39,9 +32,7 @@ const requestHandler = async (
   }
 
   if (req.url === "/api/run") {
-    console.log('RUN BENCHMARK')
-
-    const result = await nextV14(childProcesses);
+    const result = await Promise.all([nextV14(), remixV2()]);
     res.writeHead(200, { "Content-Type": "application/json" });
     res.end(JSON.stringify(result));
     return;
@@ -51,8 +42,7 @@ const requestHandler = async (
   res.end("404 Not Found");
 };
 
-const server = http.createServer((req, res) => requestHandler(req, res).finally(() => process.off("SIGINT", handleSigint)));
-
+const server = http.createServer((req, res) => requestHandler(req, res));
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
